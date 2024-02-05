@@ -12,9 +12,14 @@ with open("./Input/Letters/starting_letter.txt") as letter:
     content= letter.read()
 
 with open ("./Input/Names/invited_names.txt") as names:
-    single_name= names.readline()
-    new_content=content.replace("[name]", single_name)
-    # with open (f"./Output/ReadyToSend/{single_name}.txt", mode="w") as output:
-    #     output.write(new_content)
+    names_lis= names.readlines() #this is different from "readline()". Singular, Plural.
+    # print (names_lis) #db: we get a list of lines from the file. Entire List. When read the \n will be ignored.
 
-print (new_content)
+    for single_name in names_lis:
+        stripped_sing_name= single_name.strip()
+        new_content=content.replace("[name]", stripped_sing_name)
+        path ="./Output/ReadyToSend/"
+        with open (f"{path}{stripped_sing_name}.txt", mode="w") as output:
+            output.write(new_content)
+
+        # print (stripped_sing_name) #this is for debugging
